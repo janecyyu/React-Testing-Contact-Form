@@ -29,7 +29,7 @@ const ContactForm = () => {
         <div>
           <label htmlFor="lastName">Last Name*</label>
           <input
-          id="lastName"
+            id="lastName"
             name="lastName"
             placeholder="luo"
             ref={register({ required: true })}
@@ -50,13 +50,24 @@ const ContactForm = () => {
         </div>
         <div>
           <label htmlFor="message">Message</label>
-          <textarea id="message" name="message" ref={register({ required: false })} />
+          <textarea
+            id="message"
+            name="message"
+            ref={register({ required: false })}
+          />
+        </div>
+        <div>
+          <label htmlFor="checkbox">Agreement</label>
+          <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" ref={register({ required: true })}/>
         </div>
         {data && (
-          <pre data-testid="information" style={{ textAlign: "left", color: "white" }} >
+          <pre
+            data-testid="information"
+            style={{ textAlign: "left", color: "white" }}
+          >
             {JSON.stringify(data, null, 2)}
           </pre>
-         ) }
+        )}
         <input type="submit" value="submit"></input>
       </form>
     </div>

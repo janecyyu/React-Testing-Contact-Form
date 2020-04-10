@@ -16,26 +16,24 @@ test("First Name, Last Name and Email are appearing", () => {
   expect(Email).toBeInTheDocument();
 });
 
-test("form submit adds new data to the list", async () => {
-  const { getByLabelText, getByText, findByTestId } = render(<ContactForm />);
-  const fistNameInput = getByLabelText(/First Name/i);
-  const LastNameInput = getByLabelText(/Last Name/i);
-  const EmailInput = getByLabelText(/Email/i);
-  const MessageInput = getByLabelText(/Message/i);
-  //Act
-  fireEvent.change(fistNameInput, { target: { value: "Jo" } });
-  fireEvent.change(LastNameInput, { target: { value: "Ch" } });
-  fireEvent.change(EmailInput, { target: { value: "John@gmail.com" } });
-  fireEvent.change(MessageInput, { target: { value: "John loves dogs" } });
-  //Assert
-  expect(fistNameInput.value).toBe("Jo");
-  expect(LastNameInput.value).toBe("Ch");
-  expect(EmailInput.value).toBe("John@gmail.com");
-  expect(MessageInput.value).toBe("John loves dogs");
-  //click submit
-  fireEvent.click(getByText(/submit/i));
-  const formData = await findByTestId("information");
-  expect(formData).toBeInTheDocument();
+
+test("test to sure that the inputs can be filled in",() => {
+  async () => {
+    const { getByLabelText, findByTestId } = render(<ContactForm />);
+    const firstNameInput = getByLabelText(/First/i);
+    const lastNameInput = getByLabelText(/Last/i);
+    const emailInput = getByLabelText(/Email/i);
+    const messageInput = getByLabelText(/Message/i);
+    fireEvent.change(firstNameInput, { target: { value: "hue" } });
+    fireEvent.change(lastNameInput, { target: { value: "will" } });
+    fireEvent.change(emailInput, { target: { value: "email@mail.com" } });
+    fireEvent.change(messageInput, { target: { value: "greeting" } });
+    expect(firstNameInput.value).toBe("hue");
+    expect(lastNameInput.value).toBe("will");
+    expect(emailInput.value).toBe("email@mail.com");
+    expect(messageInput.value).toBe("greeting");
+    fireEvent.click(getByText(/submit/i));
+    const formData = await findByTestId("information");
+    expect(formData).toBeInTheDocument();
+  };
 });
-
-
